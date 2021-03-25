@@ -5,6 +5,11 @@ import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Radio from "@material-ui/core/Radio";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
 
 const useStyles = makeStyles({
   field: {
@@ -20,6 +25,7 @@ export default function CreateAlbum() {
   const [details, setDetails] = useState("");
   const [albumError, setAlbumError] = useState(false);
   const [artistError, setArtistError] = useState(false);
+  const [format, setFormat] = useState("LP");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,6 +72,21 @@ export default function CreateAlbum() {
           multiline
           rows={5}
         />
+        <FormControl className={classes.field}>
+          <FormLabel>Format</FormLabel>
+          <RadioGroup
+            value={format}
+            onChange={(e) => setFormat(e.target.value)}
+          >
+            <FormControlLabel value="LP" control={<Radio />} label="LP" />
+            <FormControlLabel value="EP" control={<Radio />} label="EP" />
+            <FormControlLabel
+              value="Single"
+              control={<Radio />}
+              label="Single"
+            />
+          </RadioGroup>
+        </FormControl>
         <Button
           type="submit"
           variant="contained"
