@@ -10,6 +10,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles({
   field: {
@@ -20,6 +21,7 @@ const useStyles = makeStyles({
 
 export default function CreateAlbum() {
   const classes = useStyles();
+  const history = useHistory();
   const [album, setAlbum] = useState("");
   const [artist, setArtist] = useState("");
   const [details, setDetails] = useState("");
@@ -38,7 +40,11 @@ export default function CreateAlbum() {
       setArtistError(true);
     }
     if (album && artist) {
-      console.log(artist, album, details);
+      fetch("http://localhost:8000/albums", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ album, artist, format, details }),
+      }).then(() => history.push("/"));
     }
   };
 

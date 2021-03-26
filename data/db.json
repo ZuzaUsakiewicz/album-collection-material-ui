@@ -1,0 +1,34 @@
+{
+  "albums": [
+    {
+      "id": 1,
+      "artist": "Gojira",
+      "album": "Magma"
+    },
+    {
+      "id": 2,
+      "artist": "Gojira",
+      "album": "Fortitude"
+    },
+    {
+      "album": "Gojira",
+      "artist": "L'enfant Sauvage",
+      "details": "",
+      "format": "LP",
+      "id": 3
+    },
+    {
+      "album": "Guardians",
+      "artist": "August Burns Red",
+      "format": "EP",
+      "id": 4
+    },
+    {
+      "album": "Erra",
+      "artist": "Erra",
+      "format": "LP",
+      "details": "this is detail",
+      "id": 5
+    }
+  ]
+}
