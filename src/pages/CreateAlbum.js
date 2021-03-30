@@ -11,12 +11,21 @@ import Radio from "@material-ui/core/Radio";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import { useHistory } from "react-router";
+import { KeyboardDatePicker } from "@material-ui/pickers";
+// import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
+// import IconButton from "@material-ui/core/IconButton";
+// import Input from "@material-ui/core/Input";
 
-const useStyles = makeStyles({
-  field: {
-    margin: 10,
-    display: "block",
-  },
+const useStyles = makeStyles((theme) => {
+  return {
+    field: {
+      margin: 10,
+      display: "block",
+    },
+    title: {
+      padding: theme.spacing(3),
+    },
+  };
 });
 
 export default function CreateAlbum() {
@@ -28,6 +37,7 @@ export default function CreateAlbum() {
   const [albumError, setAlbumError] = useState(false);
   const [artistError, setArtistError] = useState(false);
   const [format, setFormat] = useState("LP");
+  const [date, setDate] = useState(new Date());
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,14 +53,14 @@ export default function CreateAlbum() {
       fetch("http://localhost:8000/albums", {
         method: "POST",
         headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ album, artist, format, details }),
+        body: JSON.stringify({ album, artist, format, details, date }),
       }).then(() => history.push("/"));
     }
   };
 
   return (
     <Container maxWidth="sm">
-      <Typography align="center" variant="h5">
+      <Typography align="left" variant="h5" className={classes.title}>
         Add Album to Your Collection
       </Typography>
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
@@ -59,6 +69,7 @@ export default function CreateAlbum() {
           className={classes.field}
           label="Album Title"
           variant="outlined"
+          fullWidth
           required
           error={albumError}
         />
@@ -67,6 +78,7 @@ export default function CreateAlbum() {
           className={classes.field}
           label="Album Artist"
           variant="outlined"
+          fullWidth
           required
           error={artistError}
         />
@@ -75,10 +87,33 @@ export default function CreateAlbum() {
           className={classes.field}
           label="Album Details"
           variant="outlined"
+          fullWidth
           multiline
           rows={5}
         />
 
+        <KeyboardDatePicker
+          margin="normal"
+          id="date-picker-dialog"
+          label="Date picker dialog"
+          format="MM/dd/yyyy"
+          value={date}
+          onChange={setDate}
+          KeyboardButtonProps={{
+            "aria-label": "change date",
+          }}
+        />
+
+        {/* <label htmlFor="icon-button-file">
+          <Input accept="image/*" id="icon-button-file" type="file" />
+          <IconButton
+            color="primary"
+            aria-label="upload picture"
+            component="span"
+          >
+            <PhotoCameraIcon />
+          </IconButton>
+        </label> */}
         <FormControl className={classes.field}>
           <FormLabel>Format</FormLabel>
           <RadioGroup

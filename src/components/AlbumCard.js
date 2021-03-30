@@ -30,7 +30,10 @@ export default function AlbumCard({ album, handleDelete }) {
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary">
-            {album.details}{" "}
+            {album.details}
+          </Typography>
+          <Typography variant="body2" color="textSecondary">
+            {String(album.date).slice(0, 10)}
           </Typography>
         </CardContent>
       </Card>
