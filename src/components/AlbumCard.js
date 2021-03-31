@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
-import { IconButton, Typography } from "@material-ui/core";
+import { Avatar, IconButton, Typography } from "@material-ui/core";
 import { DeleteOutlined } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -11,6 +11,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import { lightBlue, cyan, teal } from "@material-ui/core/colors";
 
 const useStyles = makeStyles({
   root: {
@@ -18,10 +19,21 @@ const useStyles = makeStyles({
     height: "100%",
     textTransform: "capitalize",
   },
+  avatar: {
+    backgroundColor: (album) => {
+      if (album.format === "LP") {
+        return lightBlue[300];
+      }
+      if (album.format === "EP") {
+        return teal[300];
+      }
+      return cyan[300];
+    },
+  },
 });
 
 export default function AlbumCard({ album, handleDelete }) {
-  const classes = useStyles();
+  const classes = useStyles(album);
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -36,16 +48,17 @@ export default function AlbumCard({ album, handleDelete }) {
     <div>
       <Card elevation={4} className={classes.root}>
         <CardHeader
+          avatar={
+            <Avatar className={classes.avatar}>
+              {album.format[0] + album.format[1].toUpperCase()}
+            </Avatar>
+          }
           action={
-            // <IconButton onClick={() => handleDelete(album.id)}>
-            //   <DeleteOutlined />
-            // </IconButton>
             <IconButton onClick={handleClickOpen}>
               <DeleteOutlined />
             </IconButton>
           }
           title={album.album + " by " + album.artist}
-          subheader={album.format}
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary">

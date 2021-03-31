@@ -8,6 +8,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import AlbumIcon from "@material-ui/icons/Album";
 import CreateIcon from "@material-ui/icons/Create";
+import Avatar from "@material-ui/core/Avatar";
 import { useHistory, useLocation } from "react-router-dom";
 
 const drawerWidth = 240;
@@ -34,6 +35,10 @@ const useStyles = makeStyles((theme) => {
     },
     active: {
       background: "#6fbfdf",
+    },
+    avatar: {
+      marginLeft: theme.spacing(2),
+      marginBottom: theme.spacing(3),
     },
   };
 });
@@ -65,6 +70,7 @@ export default function Layout({ children }) {
             Menu
           </Typography>
         </div>
+        <Avatar className={classes.avatar} alt="avatar img" src="/avtr.jpg" />
         <List>
           {menuItems.map((item) => (
             <ListItem
