@@ -67,7 +67,7 @@ export default function CreateAlbum() {
         <TextField
           onChange={(e) => setAlbum(e.target.value)}
           className={classes.field}
-          label="Album Title"
+          label="Title"
           variant="outlined"
           fullWidth
           required
@@ -76,7 +76,7 @@ export default function CreateAlbum() {
         <TextField
           onChange={(e) => setArtist(e.target.value)}
           className={classes.field}
-          label="Album Artist"
+          label="Artist"
           variant="outlined"
           fullWidth
           required
@@ -85,17 +85,18 @@ export default function CreateAlbum() {
         <TextField
           onChange={(e) => setDetails(e.target.value)}
           className={classes.field}
-          label="Album Details"
+          label="Details"
           variant="outlined"
           fullWidth
           multiline
           rows={5}
+          placeholder="f.e. tracklist for an album"
         />
 
         <KeyboardDatePicker
           margin="normal"
           id="date-picker-dialog"
-          label="Date picker dialog"
+          label="Release Date"
           format="MM/dd/yyyy"
           value={date}
           onChange={setDate}
