@@ -12,6 +12,9 @@ import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import { useHistory } from "react-router";
 import { KeyboardDatePicker } from "@material-ui/pickers";
+import Checkbox from "@material-ui/core/Checkbox";
+import Favorite from "@material-ui/icons/Favorite";
+import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 // import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 // import IconButton from "@material-ui/core/IconButton";
 // import Input from "@material-ui/core/Input";
@@ -38,6 +41,7 @@ export default function CreateAlbum() {
   const [artistError, setArtistError] = useState(false);
   const [format, setFormat] = useState("LP");
   const [date, setDate] = useState(new Date());
+  const [favorite, setFavorite] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -53,9 +57,20 @@ export default function CreateAlbum() {
       fetch("http://localhost:8000/albums", {
         method: "POST",
         headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ album, artist, format, details, date }),
+        body: JSON.stringify({
+          album,
+          artist,
+          format,
+          details,
+          date,
+          favorite,
+        }),
       }).then(() => history.push("/"));
     }
+  };
+
+  const handleChange = (event) => {
+    setFavorite(event.target.checked);
   };
 
   return (
@@ -103,6 +118,13 @@ export default function CreateAlbum() {
           KeyboardButtonProps={{
             "aria-label": "change date",
           }}
+        />
+
+        <Checkbox
+          icon={<FavoriteBorder />}
+          checkedIcon={<Favorite />}
+          name="checkedH"
+          onChange={handleChange}
         />
 
         {/* <label htmlFor="icon-button-file">
