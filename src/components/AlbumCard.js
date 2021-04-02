@@ -3,7 +3,7 @@ import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import { Avatar, IconButton, Typography } from "@material-ui/core";
-import { DeleteOutlined } from "@material-ui/icons";
+import { DeleteOutlined, EditOutlined } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -12,6 +12,9 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { lightBlue, cyan, teal } from "@material-ui/core/colors";
+import Checkbox from "@material-ui/core/Checkbox";
+import Favorite from "@material-ui/icons/Favorite";
+import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 
 const useStyles = makeStyles({
   root: {
@@ -30,9 +33,12 @@ const useStyles = makeStyles({
       return cyan[300];
     },
   },
+  heart: {
+    color: "#f44336",
+  },
 });
 
-export default function AlbumCard({ album, handleDelete }) {
+export default function AlbumCard({ album, handleDelete, handleChange }) {
   const classes = useStyles(album);
   const [open, setOpen] = useState(false);
 
@@ -54,9 +60,18 @@ export default function AlbumCard({ album, handleDelete }) {
             </Avatar>
           }
           action={
-            <IconButton onClick={handleClickOpen}>
-              <DeleteOutlined />
-            </IconButton>
+            <div>
+              <IconButton
+                onClick={(e) =>
+                  console.log(e.target.parentElement.parentElement)
+                }
+              >
+                <EditOutlined />
+              </IconButton>
+              <IconButton onClick={handleClickOpen}>
+                <DeleteOutlined />
+              </IconButton>
+            </div>
           }
           title={album.album + " by " + album.artist}
         />
@@ -66,6 +81,25 @@ export default function AlbumCard({ album, handleDelete }) {
           </Typography>
           <Typography variant="body2" color="textSecondary">
             {String(album.date).slice(0, 10)}
+          </Typography>
+          <Typography variant="body">
+            {album.favorite === true ? (
+              <Checkbox
+                icon={<Favorite />}
+                checkedIcon={<FavoriteBorder />}
+                name="checkedH"
+                onChange={handleChange}
+                className={classes.heart}
+              />
+            ) : (
+              <Checkbox
+                icon={<FavoriteBorder />}
+                checkedIcon={<Favorite />}
+                name="checkedH"
+                onChange={handleChange}
+                className={classes.heart}
+              />
+            )}
           </Typography>
         </CardContent>
       </Card>
