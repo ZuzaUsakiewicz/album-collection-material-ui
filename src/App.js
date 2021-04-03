@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Albums from "./pages/Albums";
 import CreateAlbum from "./pages/CreateAlbum";
+import EditAlbum from "./pages/EditAlbum";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 
@@ -16,6 +17,9 @@ function App() {
             </Route>
             <Route path="/createalbum">
               <CreateAlbum />
+            </Route>
+            <Route path="/editalbum">
+              <EditAlbum />
             </Route>
           </Switch>
         </Layout>

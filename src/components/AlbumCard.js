@@ -38,8 +38,14 @@ const useStyles = makeStyles({
   },
 });
 
-export default function AlbumCard({ album, handleDelete, handleChange }) {
+export default function AlbumCard({
+  album,
+  handleDelete,
+  handleChange,
+  handleEdit,
+}) {
   const classes = useStyles(album);
+
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -61,11 +67,7 @@ export default function AlbumCard({ album, handleDelete, handleChange }) {
           }
           action={
             <div>
-              <IconButton
-                onClick={(e) =>
-                  console.log(e.target.parentElement.parentElement)
-                }
-              >
+              <IconButton onClick={() => handleEdit(album.id)}>
                 <EditOutlined />
               </IconButton>
               <IconButton onClick={handleClickOpen}>
