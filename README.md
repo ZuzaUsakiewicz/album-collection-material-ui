@@ -8,7 +8,6 @@
 
 ## General info
 This project is an CRUD React App using json-server for storing album collection data. User could create, edit and deleting albums. 
-<br> under :construction:
 	
 ## Technologies
 Project is created with:
